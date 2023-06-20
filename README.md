@@ -19,7 +19,7 @@ You got me fucked if you think I give a damn what you do with this mess. I stole
 3. Put pitcrew.service into /etc/systemd/system.
 4. Rename hooks/qemu.d/<vmname> with the name of the virtual machine you want to trigger passthrough. (You can make copies with different names if you want.)
 5. Put the hooks folder in /etc/libvirt, merging with the existing hooks folder.
-5a. If you want the display manager to automatically restart again, 
+5a. If you want the display manager to automatically restart again when the VM shuts down, rename /hooks/qemu.d/<vmname>/release/end/stop.sh to stop.disabled, and stop_refresh.disabled to stop_refresh.sh. 
 
 When you're done, you should have these folders, wherein <vmname> is your VM:
 ```
