@@ -1,15 +1,18 @@
-GPU Pit Crew - A hack by actuallyasriel
+# GPU Pit Crew 
+### A hack by actuallyasriel
 
 This is a set of components made with the intent of switching a graphics card from its default drivers to VFIO drivers without having to reboot or use a separate grub configuration. When set up, a hook will fire upon starting a VM (wherein a folder with the hooks exists in hooks/qemu.d with the name of said VM). The startup hook makes a file in /etc/libvirt, and triggers a small systemd unit to restart, which launches a script which *actually* does the driver handover.
 It's a very roundabout way of getting the intended result, but it does work, and it works fairly consistently from my testing.
 Note that this is NOT A COMPLETE SOLUTION! You're expected to have a working VFIO passthrough setup already! The point of this kit is to make controlling said passthrough more convenient.
 
 While this baby is 100% Bash (with traces of systemd), I've only tested it on Debian 12 Bookworm. There's no reason it shouldn't work on any systemd-based distro, but if you don't cover your ass, you tend to shit yourself.
+
 .............anyways,
 
-License: You got me fucked if you think I give a damn what you do with this mess. I stole some bits from Sebastian at Passthrough Post though, so maybe he cares? idk
+## License
+You got me fucked if you think I give a damn what you do with this mess. I stole some bits from Sebastian at Passthrough Post though, so maybe he cares? idk
 
-Installation:
+## Installation
 0. If you're using a dedicated AMD card, change the drivers in gpuset.sh accordingly. I forgot what the names of all of them were or else I'd just ship an alternative version. It's late. Don't @ me.
 1. Make sure all the shell scripts are executable, because you know how Linux is.
 2. Put gpuset.sh into /usr/bin. (Or anywhere else as long as you're willing to edit pitcrew.service to point to it. Didn't think so.)
