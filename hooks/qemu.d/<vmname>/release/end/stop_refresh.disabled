@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Debugging
+# exec 19>/home/<yourname>/Desktop/stoplogfile
+# BASH_XTRACEFD=19
+# set -x
+###
+# ^ I didn't use that while making this, they're part of Sebastian's base files. Use 'em if you like I'm not your dad
+###
+
+# Remove request file
+rm /etc/libvirt/request-passthrough
+# Relaunch Pit Crew to reset the driver to default
+notify-send 'VM Starting...' 'VM has shut down. The display manager will now restart.'
+sleep 5
+systemctl restart pitcrew
+

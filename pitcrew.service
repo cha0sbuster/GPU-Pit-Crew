@@ -1,0 +1,10 @@
+[Unit]
+Description=LEWIS HAMILTOOOON
+Before=graphical.target display-manager.service
+
+[Service]
+type=oneshot
+ExecStart=/usr/bin/gpuset.sh
+
+[Service]
+WantedBy=graphical.target display-manager.service
