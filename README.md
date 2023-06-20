@@ -22,11 +22,12 @@ You got me fucked if you think I give a damn what you do with this mess. I stole
 5a. If you want the display manager to automatically restart again, 
 
 When you're done, you should have these folders, wherein <vmname> is your VM:
+```
 /etc/libvirt/hooks/qemu.d/<vmname>/prepare/begin/start.sh
 /etc/libvirt/hooks/qemu.d/<vmname>/release/end/stop.sh
 /etc/systemd/system/pitcrew.service
 /usr/bin/gpuset.sh
-
+```
 6. Do `sudo systemctl restart libvirtd` and start your VM.
 7. Pray.
 
