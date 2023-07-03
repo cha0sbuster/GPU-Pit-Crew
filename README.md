@@ -22,7 +22,7 @@ You got me fucked if you think I give a damn what you do with this mess. I stole
    
 5a. If you want the display manager to automatically restart again when the VM shuts down, rename /hooks/qemu.d/\<vmname\>/release/end/stop.sh to stop.disabled, and stop_refresh.disabled to stop_refresh.sh. 
 
-When you're done, you should have these folders, wherein \<vmname\> is your VM:
+When you're done, you should have these files, wherein \<vmname\> is your VM:
 ```
 /etc/libvirt/hooks/qemu.d/<vmname>/prepare/begin/start.sh
 /etc/libvirt/hooks/qemu.d/<vmname>/release/end/stop.sh
