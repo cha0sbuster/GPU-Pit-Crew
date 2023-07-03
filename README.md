@@ -20,7 +20,7 @@ You got me fucked if you think I give a damn what you do with this mess. I stole
 4. Rename hooks/qemu.d/\<vmname\> with the name of the virtual machine you want to trigger passthrough. (You can make copies with different names if you want.)
 5. Put the hooks folder in /etc/libvirt, merging with the existing hooks folder.
    
-5a. If you want the display manager to automatically restart again when the VM shuts down, rename /hooks/qemu.d/\<vmname\>/release/end/stop.sh to stop.disabled, and stop_refresh.disabled to stop_refresh.sh. 
+5a. If you want the driver to be automatically reloaded when the VM shuts down, rename /hooks/qemu.d/\<vmname\>/release/end/stop.sh to stop.disabled, and stop_refresh.disabled to stop_refresh.sh. (This doesn't seem to restart the display manager again, at least with gdm, but it *does* just work from my testing.)
 
 When you're done, you should have these files, wherein \<vmname\> is your VM:
 ```
