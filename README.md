@@ -10,7 +10,7 @@ While this baby is 100% Bash (with traces of systemd), I've only tested it on De
 .............anyways,
 
 ## License
-You got me fucked if you think I give a damn what you do with this mess. I stole some bits from Sebastian at Passthrough Post though, so maybe he cares? idk
+qemu.sh, in this repo, would eventually become part of VFIO-Tools, and should be retroactively considered licensed under the BSD-2 Clause License. (Truthfully, after discovering this, I would recommend... maybe just using that.)
 
 ## Installation
 0. If you're using a dedicated AMD card, change the drivers in gpuset.sh accordingly. I forgot what the names of all of them were or else I'd just ship an alternative version. It's late. Don't @ me.
