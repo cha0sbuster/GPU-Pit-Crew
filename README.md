@@ -19,7 +19,7 @@ GPUPC is for users of QEMU-KVM with GPU passthrough via VFIO, who have a dedicat
 
 - Why systemd?
 
-*You show me your working VFIO GPU passthrough on a distro rocking OpenRC, and I'll port GPUPC to it. Bet.*
+~~*You show me your working VFIO GPU passthrough on a distro rocking OpenRC, and I'll port GPUPC to it. Bet.*~~ I've already been challenged on this. I might actually have to follow through. ... We'll see.
 
 Also, I needed an excuse to learn more about it. This was the perfect excuse. 
 
