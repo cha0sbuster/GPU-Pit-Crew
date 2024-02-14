@@ -37,16 +37,22 @@ The goal of GPUPC is to ensure driver hotplugging won't be disturbed by any runn
 That being said, rebuilding GPUPC around `vfioselect` is something I'm considering.
 
 ## Installation
-*An automated installer script has been included as of V2.* While it doesn't yet account for non-NVIDIA cards, it implements a workaround for some strange behavior I was having with LightDM. To use the automated installer, launch it with `./INSTALL.sh <domain> real`, where <domain> is the name of your VM as displayed in virsh/virt-manager. If you exclude `real`, it will install to a fake root. You could then browse around the installed files to check for problems with permissions, or double-check that the file structure matches what you expect. The installer requires you have rsync installed, but you almost certainly already do.
+
+### Install Script
+*An automated installer script has been included as of V2.* While it doesn't yet account for non-NVIDIA cards, it implements a workaround for some strange behavior I was having with LightDM. To use the automated installer, launch it with `./INSTALL.sh <domain> real`, where <domain> is the name of your VM as displayed in virsh/virt-manager. If you exclude `real`, it will install to a fake root. You could then browse around the installed files to check for problems with permissions, or double-check that the file structure matches what you expect with your distro (and complain at me if it doesn't.) The installer requires you have rsync installed, but you almost certainly already do.
+
+Caveats:
+- Currently, crystalball.sh is not automatically installed. This is obviously trivial to do, but I'd like to get a read on if my scripts cause any issues as is before adding much more. I also think having a chance to look at it and add whatever else you'd like before installation is nice.
+- AMD cards aren't currently supported, but edits to gpuset.sh could get them working. See Step 0 of Manual Installation. (If you try this, let me know how it goes, and what you changed to get it working if you do. The barrier to implementing AMD support right now is my lack of an AMD dGPU!)
 
 ### Manual Installation
-0. If you're using a dedicated AMD card, change the drivers in gpuset.sh accordingly. I forgot what the names of all of them were or else I'd just ship an alternative version. It's late. Don't @ me.
-1. Make sure all the shell scripts are executable, because you know how Linux is.
+0. If you're using a dedicated AMD card, change the drivers in gpuset.sh accordingly. You can use `lsmod` to figure out what you want to set; pay attention to entries for `video`, `kms`, and `drm`. Follow the general order displayed, as modules need to not be in use by other modules to be unloaded.
+1. Make sure all the shell scripts are executable, because you know how Linux is. (This might be fine actually? I always have problems with execute permissions.)
 2. Put gpuset.sh into /usr/bin. (Or anywhere else as long as you're willing to edit pitcrew.service to point to it.)
+2a. Put crystalball.sh anywhere in $PATH, and configure it to autostart however you'd like.
 3. Put pitcrew.service into /etc/systemd/system.
 4. Rename hooks/qemu.d/\<vmname\> with the name of the virtual machine you want to trigger passthrough. (You can make copies with different names if you want.)
 5. Put the hooks folder in /etc/libvirt, merging with the existing hooks folder.
-   
 5a. If you want the driver to be automatically reloaded when the VM shuts down, uncomment the last line in stop.sh. (This should be configurable in a file in /etc/libvirt/hooks soon.)
 
 When you're done, you should have these files, wherein \<vmname\> is your VM:
