@@ -72,6 +72,8 @@ function switch_vfio() {
 
 if   [ $mode = "nvidia" ] && [ $passthrough = "true" ] ; then
 	switch_vfio
+elif [ $mode = "vfio" ] && [ $passthrough = "true" ] ; then
+	switch_vfio
 elif [ $mode = "vfio" ] && [ $passthrough = "false" ] ; then
 	switch_nvidia
 else
