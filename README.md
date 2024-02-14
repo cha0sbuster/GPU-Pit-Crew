@@ -47,7 +47,7 @@ That being said, rebuilding GPUPC around `vfioselect` is something I'm consideri
 4. Rename hooks/qemu.d/\<vmname\> with the name of the virtual machine you want to trigger passthrough. (You can make copies with different names if you want.)
 5. Put the hooks folder in /etc/libvirt, merging with the existing hooks folder.
    
-5a. If you want the driver to be automatically reloaded when the VM shuts down, uncomment the last line in stop.sh. (This will be configurable eventually. Maybe. I'll have a go.)
+5a. If you want the driver to be automatically reloaded when the VM shuts down, uncomment the last line in stop.sh. (This should be configurable in a file in /etc/libvirt/hooks soon.)
 
 When you're done, you should have these files, wherein \<vmname\> is your VM:
 ```
