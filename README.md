@@ -42,7 +42,7 @@ That being said, rebuilding GPUPC around `vfioselect` is something I'm consideri
 ### Manual Installation
 0. If you're using a dedicated AMD card, change the drivers in gpuset.sh accordingly. I forgot what the names of all of them were or else I'd just ship an alternative version. It's late. Don't @ me.
 1. Make sure all the shell scripts are executable, because you know how Linux is.
-2. Put gpuset.sh into /usr/bin. (Or anywhere else as long as you're willing to edit pitcrew.service to point to it. Didn't think so.)
+2. Put gpuset.sh into /usr/bin. (Or anywhere else as long as you're willing to edit pitcrew.service to point to it.)
 3. Put pitcrew.service into /etc/systemd/system.
 4. Rename hooks/qemu.d/\<vmname\> with the name of the virtual machine you want to trigger passthrough. (You can make copies with different names if you want.)
 5. Put the hooks folder in /etc/libvirt, merging with the existing hooks folder.
