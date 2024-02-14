@@ -1,0 +1,34 @@
+GPU Pit Crew - A hack by actuallyasriel
+
+This is a set of components made with the intent of switching a graphics card from its default drivers to VFIO drivers without having to reboot or use a separate grub configuration. When set up, a hook will fire upon starting a VM (wherein a folder with the hooks exists in hooks/qemu.d with the name of said VM). The startup hook makes a file in /run/libvirt, and triggers a small systemd unit to restart, which launches a script which *actually* does the driver handover.
+It's a very roundabout way of getting the intended result, but it does work, and it works fairly consistently from my testing.
+
+Note: This is not a complete solution!! You're expected to have a working VFIO passthrough setup already! The point of this kit is to make controlling said passthrough more convenient.
+Note 2: Currently, the switching script only considers Nvidia GPUs, as that's what I have, and it's what's most commonly reported as causing issues with [the prevailing auto-switch solution.](https://github.com/bryansteiner/gpu-passthrough-tutorial)
+
+While this baby is 100% Bash (with traces of systemd), I've only tested it on Debian 12 Bookworm. There's no reason (that I can think of anyway) why it shouldn't work on any systemd-based distro, but if you don't cover your ass, you tend to shit yourself.
+.............anyways,
+
+Installation:
+0. Double-check that all the shell scripts are executable. (Maybe do a lil' `chmod` if you're feeling spicy.)
+1. Read gpuset.sh and edit its variables as needed.
+2. Put gpuset.sh into /usr/bin
+3. Put pitcrew.service into /etc/systemd/system
+4. Rename hooks/qemu.d/<vmname> with the name of the virtual machine you want to trigger passthrough. (You can make copies with different names if you want.)
+5. Put the contents of the hooks folder in /etc/libvirt/hooks.
+5a. If you want the driver to automatically switch back when the VM shuts down, uncomment the indicated line in /hooks/qemu.d/<vmname>/release/end/stop.sh.
+5b. If you use Looking Glass, Scream and virt-manager, and would like them to start automatically, use your preferred autostart method to launch crystalball.sh on login. It should only start them if they'd do anything.
+
+When you're done, you should have these folders, wherein <vmname> is your VM:
+/etc/libvirt/hooks/qemu.d/<vmname>/prepare/begin/start.sh
+/etc/libvirt/hooks/qemu.d/<vmname>/release/end/stop.sh
+/etc/systemd/system/pitcrew.service
+/usr/bin/gpuset.sh
+
+6. Do `sudo systemctl restart libvirtd` and start your VM.
+7. Pray.
+
+Your display manager should restart. As of V2, automatic login should work if configured in your display manager. If not, then log back in, and you should see that the VM has started, and your display (or Looking Glass) should light up in short order. `lspci -v` should show that `vfio-pci` is now in use for your graphics card. 
+
+I won't say it'll work great, or at all, but it *should* be pretty easy to troubleshoot if something goes wrong and it's my fault.
+Godspeed.

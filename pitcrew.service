@@ -1,10 +1,10 @@
 [Unit]
-Description=LEWIS HAMILTOOOON
+Description=Shim for GPU Pit Crew. Executes the driver swap script when called. LEWIS HAMILTOOOON
 Before=graphical.target display-manager.service
 
 [Service]
-type=oneshot
+Type=oneshot
 ExecStart=/usr/bin/gpuset.sh
 
-[Service]
+[Install]
 WantedBy=graphical.target display-manager.service
